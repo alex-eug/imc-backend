@@ -10,7 +10,7 @@ exports.createUser = (req, res) => {
                 email: req.body.email,
                 password: hash
             });
-            console.log(User);
+            // console.log(User);
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé' }))
                 .catch(() => res.status(400).json({ error }))
