@@ -35,12 +35,16 @@ exports.displayImc = async (req, res) => {
         let user = await User.findOne({ _id: userId })
         //récuperation des imc correspondant à l'utilisateur
         const goodImc = await Imc.find({ _id: user.imc_id })
-        console.log('hoho', goodImc);
         const javaScriptRelease = Date.parse(user.createdAt);
         console.log(javaScriptRelease);
         console.log('coucou31', user.createdAt);
-        newGoodImc = [...goodImc, { secondTime: javaScriptRelease }]
-        res.status(200).json(newGoodImc)
+        // goodImc.createAt.forEach(elm=> Date.parse(elm))]
+        res.status(200).json([goodImc])
+        console.log('hoho', goodImc);
+        
+    //    const theNewArray =   goodImc.map(elm =>elm.createdAt =  Date.parse(elm.createdAt))
+    //     console.log('lol',theNewArray);
+
     }
     catch (error) {
         throw new Error("no user found : " + error)

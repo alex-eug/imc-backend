@@ -8,10 +8,11 @@ const userCtrl = require('../controllers/user')
 //insert imc in dataBase
 
 
-router.get('/myimc',auth,imcCtrl.displayImc)
 router.post('/myimc',auth,imcCtrl.createImc)
+router.get('/myimc',auth,imcCtrl.displayImc)
 //user signin and login router
 router.post('/signin',userCtrl.createUser)
 router.post('/login',userCtrl.login);
+router.delete('/delete',userCtrl.deleteUser)
 
 module.exports = router

@@ -8,7 +8,8 @@ exports.createUser = (req, res) => {
         .then(hash => {
             const user = new User({
                 email: req.body.email,
-                password: hash
+                password: hash,
+                userName:req.body.userName
             });
             // console.log(User);
             user.save()
@@ -29,18 +30,35 @@ exports.login = (req, res) => {
                     if (!egal) {
                         return res.status(401).json({ error: 'Votre mot de passe est incorrect !' });
                     }
-                    res.status(200).json({
+                    res.status(200).json([{
                         userId: user._id,
+                        userName:user.userName,
                         token: jwt.sign(
-                            { userId: user._id },
+                            { userId: user._id,
+                            userName:user.userName },
                             process.env.SECRET,
                             { expiresIn: '24h' }
                         )
-                    });
+                    }]);
                 })
                 .catch(error => res.status(500).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
-    
-
 }
+    exports.deleteUser = async (req,res) => {
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, process.env.SECRET);
+        const userId = decodedToken.userId;
+        let user = await User.findOne({ _id: userId })
+        User.findOneAndDelete({ _id: userId }, function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+               docs=  res.status(401).json({ message: 'utilisateur supprimé!' });
+            }
+        });
+            
+        }
+        
+    
