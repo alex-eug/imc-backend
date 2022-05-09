@@ -13,6 +13,6 @@ router.get('/myimc',auth,imcCtrl.displayImc)
 //user signin and login router
 router.post('/signin',userCtrl.createUser)
 router.post('/login',userCtrl.login);
-router.delete('/delete',userCtrl.deleteUser)
+router.delete('/delete',auth,userCtrl.deleteUser)
 
 module.exports = router

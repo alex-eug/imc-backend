@@ -50,12 +50,12 @@ exports.login = (req, res) => {
         const decodedToken = jwt.verify(token, process.env.SECRET);
         const userId = decodedToken.userId;
         let user = await User.findOne({ _id: userId })
-        User.findOneAndDelete({ _id: userId }, function (err, docs) {
+        User.findOneAndDelete({ _id: userId }, function (err) {
             if (err){
                 console.log(err)
             }
             else{
-               docs=  res.status(401).json({ message: 'utilisateur supprimé!' });
+                res.status(401).json({ message: 'utilisateur supprimé!' });
             }
         });
             
