@@ -5,7 +5,7 @@ dbConnect()
 
 const router = require('./routers/route')
 const app = express()
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 
 
@@ -18,7 +18,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-
+app.get('/',(req,res)=>{
+    res.json('hello, heroku')
+})
 
 app.use(router)
 app.listen(PORT, () => {
