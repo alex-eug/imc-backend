@@ -51,7 +51,7 @@ exports.login = (req, res) => {
         const userId = decodedToken.userId;
        
         User.findOneAndDelete({ _id: userId })
-        .then( res.status(401).json({ message: 'utilisateur supprimé!' }))
+        .then( res.status(200).json({ message: 'utilisateur supprimé!' }))
         .catch(error => res.status(500).json({ error }))
             
                
