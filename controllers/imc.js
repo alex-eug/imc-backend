@@ -18,7 +18,7 @@ exports.createImc = async (req, res) => {
         const newImc = await Imc.create({ imc })
         await user.updateOne({ $push: { imc_id: newImc._id } })
         console.log('newImc', newImc._id);
-        res.json('imc créé')
+        resstatus(200).json('imc créé')
     } catch (error) {
         throw new Error("no user create : " + error)
     }
