@@ -52,7 +52,7 @@ exports.login = (req, res) => {
         
         User.findOneAndDelete({ _id: userId })
         .then( res.status(401).json({ message: 'utilisateur supprimé!' }))
-        .catch(error => res.status(500).json({ error }))
+        .catch(() => res.status(400).json({ error }))
             
                
     }   
