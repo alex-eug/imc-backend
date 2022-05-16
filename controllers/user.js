@@ -49,7 +49,7 @@ exports.login = (req, res) => {
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, process.env.SECRET);
         const userId = decodedToken.userId;
-        let user = await User.findOne({ _id: userId })
+       
         User.findOneAndDelete({ _id: userId })
         .then( res.status(401).json({ message: 'utilisateur supprimé!' }))
         .catch(error => res.status(500).json({ error }))
