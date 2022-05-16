@@ -52,7 +52,7 @@ exports.login = (req, res) => {
         let user = await User.findOne({ _id: userId })
         User.findOneAndDelete({ _id: userId }, function (err) {
             if (err){
-                console.log(err)
+                console.log("ceci est l erreur",err)
             }
             else{
                 res.status(401).json({ message: 'utilisateur supprimé!' });
